@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { domain } from '$lib/utils';
 	import axios from 'axios';
-	import { fade, slide } from 'svelte/transition';
+	import { slide } from 'svelte/transition';
 	import { user } from '$lib/Layout/stores';
 
 	let username = '';
@@ -19,11 +19,11 @@
 				username,
 				password
 			})
-			.then((res) => {
+			.then(async (res) => {
 				errorMessage = null;
 				user.set(res.data);
 				loading = false;
-				goto('2022');
+				await goto('2022');
 			})
 			.catch((err) => {
 				errorMessage = err.response.data.message;
