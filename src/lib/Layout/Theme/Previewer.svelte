@@ -5,6 +5,8 @@
 
 	export let colors: string[];
 
+	const currentDate = new Date();
+
 	let frameRef: HTMLIFrameElement;
 	let body: HTMLElement;
 
@@ -28,7 +30,7 @@
 </script>
 
 <div class="container" transition:slide>
-	<iframe bind:this={frameRef} src={domain + 'preview'} title="preview" />
+	<iframe bind:this={frameRef} src={domain + `${currentDate.getFullYear()}/${currentDate.getMonth()}/${currentDate.getDate()}/preview`} title="preview" />
 </div>
 
 <style>

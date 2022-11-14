@@ -71,10 +71,15 @@
 		width: 100vw;
 		height: 100vh;
 
+		--primary-color: rgb(148, 148, 231);
+		--secondary-color: green;
+		--bg-color: rgb(130, 181, 190);
+
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
+		background: var(--bg-color);
 	}
 
 	h1 {

@@ -131,6 +131,9 @@
 	}
 
 	.container {
+		--primary-color: rgb(101, 101, 255);
+		--secondary-color: rgb(51, 160, 51);
+		--bg-color: rgb(130, 181, 190);
 		width: 100vw;
 		height: 100vh;
 		display: flex;
@@ -138,6 +141,8 @@
 		justify-content: center;
 		align-items: center;
 		gap: 1rem;
+
+		background: var(--bg-color);
 	}
 
 	.menu {
