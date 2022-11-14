@@ -4,7 +4,7 @@ import { UserModel, type IUser } from '$lib/db/Schemas/User';
 import type { HydratedDocument } from 'mongoose';
 import { connect } from '$lib/db/connect';
 
-export const POST: RequestHandler = async ({ locals, request, cookies }) => {
+export const POST: RequestHandler = async ({ request, cookies }) => {
 	await connect();
 	const { username, password } = await request.json();
 
@@ -15,8 +15,8 @@ export const POST: RequestHandler = async ({ locals, request, cookies }) => {
 	if (user) {
 		cookies.set('session', user._id.toString(), {
 			path: '/',
-			sameSite: 'strict',
-			secure: process.env.NODE_ENV === 'production',
+			sameSite: 'none',
+			secure: true,
 			maxAge: 60 * 60 * 24 * 30
 		});
 		return new Response(JSON.stringify(user));
