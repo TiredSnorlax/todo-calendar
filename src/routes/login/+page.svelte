@@ -3,7 +3,6 @@
 	import { domain } from '$lib/utils';
 	import axios from 'axios';
 	import { slide } from 'svelte/transition';
-	import { user } from '$lib/Layout/stores';
 
 	let username = '';
 	let password = '';
@@ -21,9 +20,10 @@
 			})
 			.then(async (res) => {
 				errorMessage = null;
-				user.set(res.data);
+				// window.location = domain + `${new Date().getFullYear}`;
+				await goto('/' + new Date().getFullYear());
+
 				loading = false;
-				await goto('2022');
 			})
 			.catch((err) => {
 				errorMessage = err.response.data.message;

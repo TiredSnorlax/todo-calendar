@@ -15,10 +15,8 @@
 		if (selectedMonth) matrix = generateMonth(months[selectedMonth!], year);
 	}
 
-	const datesGoto = (date: number) => {
-		setTimeout(() => {
-			goto(`./${year}/${selectedMonth}/${date}`);
-		}, 400);
+	const datesGoto = async (date: number) => {
+		await goto(`./${year}/${selectedMonth}/${date}`);
 	};
 
 	const getHighlighted = async () => {
