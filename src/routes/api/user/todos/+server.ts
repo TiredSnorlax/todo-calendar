@@ -1,0 +1,11 @@
+import { connect } from '$lib/db/connect';
+import type { RequestHandler } from './$types';
+import { DateModel } from '$lib/db/Schemas/Date';
+
+export const POST: RequestHandler = async ({ cookies, request }) => {
+	await connect();
+	const userID = cookies.get('session');
+
+	const dates = await DateModel.find({ user: userID }).populate("todos").sort({ year: 1, month: 1, day: 1 }).exec();
+	return new Response(JSON.stringify(dates));
+};
