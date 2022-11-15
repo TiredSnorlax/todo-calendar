@@ -1,8 +1,9 @@
-import { error, redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { UserModel, type IUser } from '$lib/db/Schemas/User';
+import type { IUser } from '$lib/db/Schemas/User';
 import type { HydratedDocument } from 'mongoose';
 import { connect } from '$lib/db/connect';
+import { UserModel } from '$lib/db/Schemas';
 
 export const POST: RequestHandler = async ({ request, cookies }) => {
 	await connect();

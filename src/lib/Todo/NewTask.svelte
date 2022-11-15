@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { ITodo } from '$lib/db/Schemas/Todo';
-	import { onDestroy } from 'svelte';
-	import { slide, blur, scale, fade } from 'svelte/transition';
+	import { slide, fade, scale } from 'svelte/transition';
 	import { options, statusColors } from '.';
 	import Dropdown from './Dropdown.svelte';
 
@@ -51,14 +50,13 @@
 			createNewTodo();
 		}
 	};
-
 </script>
 
 <svelte:window on:keydown={onKeyDown} />
 
 <div class="newTaskContainer">
 	{#if newTodo}
-		<div transition:slide={{ duration: 500 }}>
+		<div transition:scale={{ duration: 500 }}>
 			<div class="fields">
 				<div>
 					<Dropdown {options} colors={statusColors} bind:value={newTodo.status} editing={true} />
@@ -123,6 +121,10 @@
 
 	h2:hover {
 		color: white;
+	}
+
+	.newTaskContainer {
+		padding-bottom: 1rem;
 	}
 
 	.newTaskContainer > div {

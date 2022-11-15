@@ -5,12 +5,9 @@
 	import { themes, type ITheme } from '../Theme';
 	import { user, themeID } from '../stores';
 	import NewThemePicker from '../Theme/NewThemePicker.svelte';
-	import ColorPicker from '../Theme/ColorPicker.svelte';
 	import ThemeItem from '../Theme/ThemeItem.svelte';
 
 	export let open: boolean;
-
-	let preview = false;
 
 	let updatingThemeId: string | null = null;
 
@@ -35,19 +32,13 @@
 	};
 </script>
 
-<div
-	class="menu"
-	on:mouseenter={() => (preview = false)}
-	on:mouseleave={() => (preview = true)}
-	in:slide
-	out:scale
->
+<div class="menu" in:slide out:scale>
 	<h1>Color Themes</h1>
 	<div class="themes">
 		<NewThemePicker bind:updatingThemeId />
 		{#if $user}
 			{#each $user.settings.additionalThemes as theme}
-				<ThemeItem {theme} {changeTheme} userMade={true} bind:updatingThemeId  />
+				<ThemeItem {theme} {changeTheme} userMade={true} bind:updatingThemeId />
 			{/each}
 		{/if}
 
@@ -64,7 +55,7 @@
 	.menu {
 		padding: 2rem;
 		width: calc(100% - 4rem);
-		max-height: calc(100vh - 6rem);
+		max-height: calc(100vh - 8rem);
 		max-width: 700px;
 
 		position: absolute;
@@ -82,10 +73,6 @@
 		text-align: center;
 		align-self: center;
 	}
-
-	/* .menu.preview {
-		opacity: 0.3;
-	} */
 
 	.themes {
 		display: flex;

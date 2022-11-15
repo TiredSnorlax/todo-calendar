@@ -22,8 +22,6 @@
 				errorMessage = null;
 				// window.location = domain + `${new Date().getFullYear}`;
 				await goto('/' + new Date().getFullYear());
-
-				loading = false;
 			})
 			.catch((err) => {
 				errorMessage = err.response.data.message;
@@ -71,7 +69,7 @@
 		width: 100vw;
 		height: 100vh;
 
-		--primary-color: rgb(148, 148, 231);
+		--primary-color: rgb(128, 128, 255);
 		--secondary-color: green;
 		--bg-color: rgb(130, 181, 190);
 

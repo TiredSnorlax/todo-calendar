@@ -131,7 +131,7 @@
 	}
 
 	.container {
-		--primary-color: rgb(101, 101, 255);
+		--primary-color: rgb(128, 128, 255);
 		--secondary-color: rgb(51, 160, 51);
 		--bg-color: rgb(130, 181, 190);
 		width: 100vw;

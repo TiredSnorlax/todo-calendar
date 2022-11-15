@@ -1,7 +1,8 @@
 import { error, type RequestHandler } from '@sveltejs/kit';
-import { UserModel, type IUser } from '$lib/db/Schemas/User';
-import { TodoModel, type ITodo } from '$lib/db/Schemas/Todo';
-import { DateModel, type IDate } from '$lib/db/Schemas/Date';
+import type { IUser } from '$lib/db/Schemas/User';
+import type { ITodo } from '$lib/db/Schemas/Todo';
+import type { IDate } from '$lib/db/Schemas/Date';
+import { TodoModel, UserModel, DateModel } from '$lib/db/Schemas';
 import type { HydratedDocument } from 'mongoose';
 import { connect } from '$lib/db/connect';
 import type { IChange } from '$lib/Todo';
@@ -30,14 +31,21 @@ export const PUT: RequestHandler = async ({ request, params, cookies }) => {
 	if (date) {
 		dateObj = (await DateModel.findById(date._id).exec()) as HydratedDocument<IDate>;
 		await dateObj.updateOne({
-			$push: { todos: newTodo },
-			$addToSet: { tags: newTodo.tag }
+			$push: { todos: newTodo }
 		});
+		if (newTodo.tag !== '') {
+			await dateObj.updateOne({
+				$addToSet: { tags: newTodo.tag }
+			});
+		}
 	} else {
-		dateObj = new DateModel({ year, month, day, user, tags: [newTodo.tag], todos: [newTodo] });
+		dateObj = new DateModel({ year, month, day, user, tags: [], todos: [newTodo] });
 		await user.updateOne({
 			$push: { dates: dateObj }
 		});
+		if (newTodo.tag !== '') {
+			dateObj.tags.push(newTodo.tag);
+		}
 		await user.save();
 	}
 

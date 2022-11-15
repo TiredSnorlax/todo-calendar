@@ -7,7 +7,7 @@
 
 	let currentMenu: any;
 	let menus = [ThemeMenu, ProfileMenu];
-	let menuIcons = ["palette", "face"]
+	let menuIcons = ['palette', 'face'];
 
 	const setCurrentMenu = (menu: any) => {
 		if (currentMenu !== menu) currentMenu = menu;
@@ -31,7 +31,8 @@
 		{#each menus as menu, i}
 			<div class="icon" class:selected={currentMenu === menu} transition:scale={{ delay: 100 * i }}>
 				<span class="material-icons-outlined" on:click={() => setCurrentMenu(menu)}
-					>{menuIcons[i]}</span>
+					>{menuIcons[i]}</span
+				>
 			</div>
 		{/each}
 	{/if}
@@ -86,6 +87,7 @@
 		width: 100vw;
 
 		background: rgba(0, 0, 0, 0.3);
+		backdrop-filter: blur(2px);
 
 		display: flex;
 		justify-content: center;

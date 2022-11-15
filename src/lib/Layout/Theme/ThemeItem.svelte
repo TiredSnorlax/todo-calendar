@@ -14,6 +14,7 @@
 <div
 	class="themeItem user"
 	class:selected={theme.id === $themeID}
+	class:using={theme.id === $user?.settings.themeID}
 	on:click={() => changeTheme(theme.id)}
 >
 	<div class="top">
@@ -80,6 +81,10 @@
 
 	.themeItem.selected {
 		background: rgba(0, 0, 0, 0.15);
+	}
+
+	.themeItem.using {
+		border: 2px solid var(--primary-color);
 	}
 
 	.markers {

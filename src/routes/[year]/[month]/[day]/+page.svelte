@@ -11,6 +11,7 @@
 	import type { IDate } from '$lib/db/Schemas/Date';
 	import type { ITodo } from '$lib/db/Schemas/Todo';
 	import type { IChange } from '$lib/Todo';
+	import LoadingOverlay from '$lib/miscellaneous/LoadingOverlay.svelte';
 
 	export let data: PageData;
 
@@ -20,15 +21,11 @@
 	let month = parseInt($page.params.month);
 	let year = parseInt($page.params.year);
 
-	let modified: IChange[] = [];
-
-	$: date = JSON.parse(data.date) as IDate;
-	// $: tasks = date ? date.todos : [];
 	let tasks: ITodo[];
 
-	$: {
-		update(date);
-	}
+	let modified: IChange[] = [];
+
+	let loading = false;
 
 	const update = (date: IDate) => {
 		if (date.todos) {
@@ -41,6 +38,7 @@
 	const createNewTodo = async () => {
 		if (!newTodo || !newTodo!.task) return;
 		if (tasks.map((t) => t.task).includes(newTodo!.task)) return;
+		loading = true;
 		await axios
 			.put(domain + `api/${year}/${month}/${day}/`, {
 				newTodo
@@ -49,24 +47,39 @@
 				console.log(res);
 				tasks = [...tasks, res.data.newTodo];
 				newTodo = null;
+				loading = false;
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				console.log(err);
+				loading = false;
+			});
 	};
 
 	const deleteTask = async (id: string | undefined) => {
-		axios
+		loading = true;
+		await axios
 			.delete(domain + `api/${year}/${month}/${day}/`, {
 				data: { id }
 			})
 			.then(() => {
 				tasks = tasks.filter((t) => t._id !== id);
+				loading = false;
 			})
 			.catch((err) => {
 				console.log(err);
+				loading = false;
 			});
 	};
+
+	$: date = JSON.parse(data.date) as IDate;
+	// $: tasks = date ? date.todos : [];
+
+	$: {
+		update(date);
+	}
 </script>
 
+<LoadingOverlay {loading} />
 <main class="container" transition:slide>
 	<div class="dateContainer">
 		{#key data.day}
@@ -75,7 +88,9 @@
 	</div>
 	<div class="content">
 		<List bind:tasks tags={date.tags} {deleteTask} bind:modified />
-		<NewTask bind:newTodo tags={date.tags} {createNewTodo} />
+		{#key data.day}
+			<NewTask bind:newTodo tags={date.tags} {createNewTodo} />
+		{/key}
 	</div>
 </main>
 

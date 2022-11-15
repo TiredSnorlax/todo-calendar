@@ -1,5 +1,6 @@
 import { connect } from '$lib/db/connect';
-import { DateModel, type IDate } from '$lib/db/Schemas/Date';
+import { DateModel } from '$lib/db/Schemas';
+import type { IDate } from '$lib/db/Schemas/Date';
 import type { RequestHandler } from '@sveltejs/kit';
 import type { HydratedDocument } from 'mongoose';
 
@@ -17,7 +18,7 @@ export const POST: RequestHandler = async ({ cookies, params }) => {
 
 	let highlightedDates: number[] = [];
 	if (dates) {
-		highlightedDates = dates.map((d) => d.day);
+		highlightedDates = dates.filter((d) => d.todos.length > 0).map((d) => d.day);
 	}
 
 	return new Response(JSON.stringify(highlightedDates));

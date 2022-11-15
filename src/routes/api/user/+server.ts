@@ -1,10 +1,11 @@
 import { connect } from '$lib/db/connect';
-import { UserModel, type IUser } from '$lib/db/Schemas/User';
+import { UserModel } from '$lib/db/Schemas';
+import type { IUser } from '$lib/db/Schemas/User';
 import { error } from '@sveltejs/kit';
 import type { HydratedDocument } from 'mongoose';
 import type { RequestHandler } from './$types';
 
-export const GET: RequestHandler = async ({ url, cookies }) => {
+export const GET: RequestHandler = async ({ cookies }) => {
 	await connect();
 	const userID = cookies.get('session');
 	if (userID) {

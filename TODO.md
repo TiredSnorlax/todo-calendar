@@ -19,6 +19,10 @@
 - [x] Profile page to show all undone tasks
 - [x] Add load user on page load
 
+URGENT
+- [ ] Fix db connection
+
+
 # Routes
 
 - /[year]/[month]/[date]

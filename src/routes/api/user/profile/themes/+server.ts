@@ -1,5 +1,6 @@
 import { connect } from '$lib/db/connect';
-import { UserModel, type IUser } from '$lib/db/Schemas/User';
+import { UserModel } from '$lib/db/Schemas';
+import type { IUser } from '$lib/db/Schemas/User';
 import type { HydratedDocument } from 'mongoose';
 import type { RequestHandler } from './$types';
 

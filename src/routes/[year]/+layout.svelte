@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { themes, type ITheme } from '$lib/Layout/Theme';
 
 	import { themeID, user } from '$lib/Layout/stores';
@@ -76,10 +76,6 @@
 	}
 
 	.container {
-		/* --primary-color: black;
-		--secondary-color: white;
-		--bg-color: white; */
-
 		width: 100vw;
 		min-height: 100vh;
 		position: relative;

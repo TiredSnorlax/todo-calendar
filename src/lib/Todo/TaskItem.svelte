@@ -26,6 +26,15 @@
 	let newTag = tag;
 	let newStatus = status;
 
+	let initialCompleted = completed;
+
+	const markCompleted = (completed: boolean) => {
+		if (initialCompleted === completed) return;
+		let change = { completed };
+		markModified(_id!, change);
+		initialCompleted = completed;
+	};
+
 	const save = () => {
 		let change: any = {};
 		if (newTask !== task) {
@@ -47,6 +56,8 @@
 
 		if (Object.entries(change).length > 0) markModified(_id!, change);
 	};
+
+	$: markCompleted(completed);
 
 	$: {
 		if (!editing) {

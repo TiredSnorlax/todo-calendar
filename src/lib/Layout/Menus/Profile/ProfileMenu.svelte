@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { IDate } from '$lib/db/Schemas/Date';
+	import type { ITodo } from '$lib/db/Schemas/Todo';
 	import { user } from '$lib/Layout/stores';
 	import { domain } from '$lib/utils';
 	import axios from 'axios';
@@ -25,9 +26,10 @@
 	const getNumTodos = () => {
 		let l = 0;
 		console.log(dates);
-		const _todos = dates.map((d) => {
-			l += d.todos.length;
-			console.log(d.todos);
+		dates.map((d) => {
+			d.todos.map((t) => {
+				if (t.completed === false) l++;
+			});
 		});
 		numTodos = l;
 	};
@@ -81,6 +83,10 @@
 
 		background: white;
 		border-radius: 0.5rem;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
 	}
 
 	.info {
@@ -156,6 +162,8 @@
 	}
 
 	.todosContainer {
+		min-height: 0;
+		height: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -164,9 +172,9 @@
 
 	.todosList {
 		width: 100%;
-		padding: 1rem;
 		max-height: 400px;
-		overflow-y: scroll;
+		padding: 1rem;
+		overflow-y: auto;
 		scrollbar-color: rgba(0, 0, 0, 0.4) white !important;
 
 		display: flex;
@@ -209,6 +217,9 @@
 		.menu {
 			width: calc(100% - 2rem);
 			padding: 1rem;
+		}
+		.stats {
+			padding-bottom: 0;
 		}
 	}
 </style>
