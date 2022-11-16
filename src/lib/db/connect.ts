@@ -1,7 +1,11 @@
-import { domain } from '$lib/utils';
+import mongoose from 'mongoose';
+import { MONGODB_URI } from '$env/static/private';
+
+const uri = MONGODB_URI;
 
 export const connect = async () => {
-	await fetch(domain + 'api/connect', {
-		method: 'POST'
-	});
+	if (mongoose.connection.readyState === 0 || mongoose.connection.readyState === 3) {
+		console.log(' new connection');
+		await mongoose.connect(uri, { dbName: 'calendar-todo-db' });
+	}
 };
