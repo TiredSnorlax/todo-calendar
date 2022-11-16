@@ -1,11 +1,11 @@
-import { db } from '../connect';
+import mongoose from 'mongoose';
 
 import type { ITheme } from '$lib/Layout/Theme';
 import type { IDate } from './Date';
 import type { ITodo } from './Todo';
 import type { IUser } from './User';
 
-const { Schema } = db;
+const { Schema } = mongoose;
 
 const dateSchema = new Schema<IDate>({
 	year: Number,
@@ -14,12 +14,12 @@ const dateSchema = new Schema<IDate>({
 	tags: [String],
 	todos: [
 		{
-			type: db.Types.ObjectId,
+			type: mongoose.Types.ObjectId,
 			ref: 'Todo'
 		}
 	],
 	user: {
-		type: db.Types.ObjectId,
+		type: mongoose.Types.ObjectId,
 		ref: 'User'
 	}
 });
@@ -31,7 +31,7 @@ const userSchema = new Schema<IUser>({
 
 	dates: [
 		{
-			type: db.Types.ObjectId,
+			type: mongoose.Types.ObjectId,
 			ref: 'Date'
 		}
 	]
@@ -43,13 +43,13 @@ export const todoSchema = new Schema<ITodo>({
 	status: String,
 	details: { type: String, required: false },
 	user: {
-		type: db.Types.ObjectId,
+		type: mongoose.Types.ObjectId,
 		ref: 'user'
 	},
 	tag: String
 });
 
 console.log('initModels');
-export const TodoModel = db.models.Todo || db.model('Todo', todoSchema);
-export const DateModel = db.models.Date || db.model('Date', dateSchema);
-export const UserModel = db.models.User || db.model('User', userSchema);
+export const TodoModel = mongoose.models.Todo || mongoose.model('Todo', todoSchema);
+export const DateModel = mongoose.models.Date || mongoose.model('Date', dateSchema);
+export const UserModel = mongoose.models.User || mongoose.model('User', userSchema);

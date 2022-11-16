@@ -40,7 +40,7 @@
 		if (tasks.map((t) => t.task).includes(newTodo!.task)) return;
 		loading = true;
 		await axios
-			.put(domain + `api/${year}/${month}/${day}/`, {
+			.put(domain + `api/${date.year}/${date.month}/${date.day}/`, {
 				newTodo
 			})
 			.then((res) => {

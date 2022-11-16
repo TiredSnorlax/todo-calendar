@@ -21,6 +21,7 @@
 
 URGENT
 - [ ] Fix db connection
+- [ ] Add loading screen after save 
 
 
 # Routes
