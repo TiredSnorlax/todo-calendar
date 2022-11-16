@@ -5,7 +5,8 @@ const uri = MONGODB_URI;
 
 export const connect = async () => {
 	if (mongoose.connection.readyState === 0 || mongoose.connection.readyState === 3) {
-		console.log(' new connection');
-		await mongoose.connect(uri, { dbName: 'calendar-todo-db' });
+		await mongoose.connect(uri, { dbName: 'calendar-todo-db' }).then(() => {
+			console.log('new connection');
+		});
 	}
 };
