@@ -5,6 +5,7 @@ import type { RequestHandler } from '@sveltejs/kit';
 import type { HydratedDocument } from 'mongoose';
 
 export const POST: RequestHandler = async ({ cookies, params }) => {
+	await connect();
 	const { year, month } = params;
 
 	const userId = cookies.get('session');

@@ -8,6 +8,7 @@ import { connect } from '$lib/db/connect';
 import type { IChange } from '$lib/Todo';
 
 export const PUT: RequestHandler = async ({ request, params, cookies }) => {
+	await connect();
 	const data = await request.json();
 	const { year, month, day } = params;
 	const user = (await UserModel.findById(cookies.get('session')).populate(
@@ -56,6 +57,7 @@ export const PUT: RequestHandler = async ({ request, params, cookies }) => {
 };
 
 export const DELETE: RequestHandler = async ({ request, cookies, params }) => {
+	await connect();
 	const { year, month, day } = params;
 	const { id } = await request.json();
 
@@ -83,7 +85,7 @@ export const DELETE: RequestHandler = async ({ request, cookies, params }) => {
 };
 
 export const POST: RequestHandler = async ({ request, cookies }) => {
-
+	await connect();
 	const userId = cookies.get('session');
 	const { modified }: { modified: IChange[] } = await request.json();
 

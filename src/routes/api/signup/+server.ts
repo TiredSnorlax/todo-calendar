@@ -6,6 +6,7 @@ import type { HydratedDocument } from 'mongoose';
 import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ request }) => {
+	await connect();
 	const { username, password } = await request.json();
 
 	const _user = (await UserModel.findOne({ username }).exec()) as HydratedDocument<IUser>;
