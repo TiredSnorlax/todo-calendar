@@ -6,7 +6,6 @@ import { connect } from '$lib/db/connect';
 import { UserModel } from '$lib/db/Schemas';
 
 export const POST: RequestHandler = async ({ request, cookies }) => {
-	await connect();
 	const { username, password } = await request.json();
 
 	const user = (await UserModel.findOne({ username, password }).exec()) as

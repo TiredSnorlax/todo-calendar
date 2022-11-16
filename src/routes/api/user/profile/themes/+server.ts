@@ -5,7 +5,6 @@ import type { HydratedDocument } from 'mongoose';
 import type { RequestHandler } from './$types';
 
 export const PUT: RequestHandler = async ({ cookies, request }) => {
-	await connect();
 	const userID = cookies.get('session');
 	const { additionalTheme } = await request.json();
 
@@ -20,7 +19,6 @@ export const PUT: RequestHandler = async ({ cookies, request }) => {
 };
 
 export const POST: RequestHandler = async ({ cookies, request }) => {
-	await connect();
 	const userID = cookies.get('session');
 	const { updatedTheme, originalId } = await request.json();
 

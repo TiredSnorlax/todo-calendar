@@ -6,7 +6,6 @@ import type { HydratedDocument } from 'mongoose';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ cookies }) => {
-	await connect();
 	const userID = cookies.get('session');
 	if (userID) {
 		try {
@@ -21,7 +20,6 @@ export const GET: RequestHandler = async ({ cookies }) => {
 };
 
 export const POST: RequestHandler = async ({ cookies, request }) => {
-	await connect();
 	const userID = cookies.get('session');
 	const newInfo = await request.json();
 	if (userID) {
