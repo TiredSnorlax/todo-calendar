@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import { MONGODB_URI } from '$env/static/private';
-import { domain } from '$lib/utils';
 
 // export const connect = async () => {
 // 	if (mongoose.connection.readyState === 0 || mongoose.connection.readyState === 3) {
