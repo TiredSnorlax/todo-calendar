@@ -1,9 +1,9 @@
-// import connect from '$lib/db/connect';
+import { connect } from '$lib/db/connect';
 import { DateModel } from '$lib/db/Schemas';
 import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ cookies }) => {
-	// await connect();
+	await connect();
 	const userID = cookies.get('session');
 
 	const dates = await DateModel.find({ user: userID })

@@ -1,11 +1,11 @@
-// import connect from '$lib/db/connect';
+import { connect } from '$lib/db/connect';
 import { UserModel } from '$lib/db/Schemas';
 import type { IUser } from '$lib/db/Schemas/User';
 import type { HydratedDocument } from 'mongoose';
 import type { RequestHandler } from './$types';
 
 export const PUT: RequestHandler = async ({ cookies, request }) => {
-	// await connect();
+	await connect();
 	const userID = cookies.get('session');
 	const { additionalTheme } = await request.json();
 
@@ -20,7 +20,7 @@ export const PUT: RequestHandler = async ({ cookies, request }) => {
 };
 
 export const POST: RequestHandler = async ({ cookies, request }) => {
-	// await connect();
+	await connect();
 	const userID = cookies.get('session');
 	const { updatedTheme, originalId } = await request.json();
 

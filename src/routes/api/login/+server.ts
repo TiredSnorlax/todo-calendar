@@ -2,11 +2,11 @@ import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import type { IUser } from '$lib/db/Schemas/User';
 import type { HydratedDocument } from 'mongoose';
-// import connect from '$lib/db/connect';
 import { UserModel } from '$lib/db/Schemas';
+import { connect } from '$lib/db/connect';
 
 export const POST: RequestHandler = async ({ request, cookies }) => {
-	// await connect();
+	await connect();
 	const { username, password } = await request.json();
 
 	const user = (await UserModel.findOne({ username, password }).exec()) as

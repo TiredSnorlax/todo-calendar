@@ -1,15 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { domain } from '$lib/utils';
-	import axios from 'axios';
-	import { onMount } from 'svelte';
 	import { days, generateMonth, months } from './index';
 	export let year: number;
 	export let selectedMonth: number;
 	export let titleLength: number;
+	export let highlightedDates: number[] = [];
 
 	let matrix: number[][];
-	let highlightedDates: number[] = [];
 
 	$: {
 		if (selectedMonth) matrix = generateMonth(months[selectedMonth!], year);
@@ -18,21 +15,6 @@
 	const datesGoto = async (date: number) => {
 		await goto(`./${year}/${selectedMonth}/${date}`);
 	};
-
-	const getHighlighted = async () => {
-		await axios
-			.post(domain + `api/${year}/${selectedMonth}`)
-			.then((res) => {
-				highlightedDates = res.data;
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	};
-
-	onMount(() => {
-		getHighlighted();
-	});
 </script>
 
 <div class="datesContainer">

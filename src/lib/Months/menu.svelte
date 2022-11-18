@@ -1,16 +1,26 @@
 <script lang="ts">
-	import { days, months, generateMonth } from '$lib/Months/index';
-	import { fade, fly, slide } from 'svelte/transition';
+	import { months } from '$lib/Months/index';
+	import { fade, fly } from 'svelte/transition';
 	import { quadInOut } from 'svelte/easing';
 	import MonthCalendar from './MonthCalendar.svelte';
 	import { send, receive } from './monthCrossFade';
 
 	export let selectedMonth: number;
 	export let year: number;
+	export let highlighted: number[][] = [];
 
 	let changeKey = -1;
+	let change = 0;
+
+	const updateHighlighted = (index: number) => {
+		// console.log(highlighted[index - 1]);
+		return highlighted[index - 1];
+	};
+
+	$: menuHighlighted = updateHighlighted(selectedMonth);
 
 	let containerDiv: HTMLDivElement | null;
+
 	const close = (e: MouseEvent) => {
 		change = 0;
 		changeKey = selectedMonth;
@@ -18,8 +28,6 @@
 			selectedMonth = 0;
 		}
 	};
-
-	let change = 0;
 
 	const increment = () => {
 		selectedMonth!++;
@@ -40,7 +48,13 @@
 </script>
 
 {#if selectedMonth}
-	<div class="container" transition:fade  class:active={selectedMonth} bind:this={containerDiv} on:click={close}>
+	<div
+		class="container"
+		transition:fade
+		class:active={selectedMonth}
+		bind:this={containerDiv}
+		on:click={close}
+	>
 		<div class="menu" in:receive={{ key: selectedMonth }} out:send={{ key: changeKey }}>
 			{#key selectedMonth}
 				<div
@@ -60,7 +74,14 @@
 					<h2>
 						{months[selectedMonth]}
 					</h2>
-					<MonthCalendar {year} {selectedMonth} titleLength={3} />
+					{#key selectedMonth}
+						<MonthCalendar
+							{year}
+							{selectedMonth}
+							titleLength={3}
+							highlightedDates={menuHighlighted}
+						/>
+					{/key}
 				</div>
 			{/key}
 		</div>

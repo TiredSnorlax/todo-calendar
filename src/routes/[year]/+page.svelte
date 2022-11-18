@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { PageData } from './$types';
 	import { getMonths, type IMonth, months } from '$lib/Months/index';
 	import Menu from '$lib/Months/menu.svelte';
 	import { scale, fade } from 'svelte/transition';
@@ -7,9 +6,12 @@
 	import MonthCalendar from '$lib/Months/MonthCalendar.svelte';
 	import { send, receive } from '$lib/Months/monthCrossFade';
 	import { page } from '$app/stores';
+	import axios from 'axios';
+	import { domain } from '$lib/utils';
 
 	let year = parseInt($page.params.year);
 	let monthsList: IMonth[] = [];
+	let highlighted: number[][] = [];
 
 	let selectedMonth = 0;
 
@@ -20,9 +22,21 @@
 	const decrementYear = () => {
 		year--;
 	};
+	const getHighlighted = async () => {
+		await axios
+			.post(domain + `api/${year}`)
+			.then((res) => {
+				highlighted = res.data;
+				// console.log(highlighted)
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 
 	onMount(() => {
 		monthsList = getMonths(year);
+		getHighlighted();
 		console.log(monthsList);
 	});
 </script>
@@ -47,14 +61,14 @@
 					{#if month !== months[selectedMonth]}
 						<div in:receive={{ key: i + 1 }} out:send={{ key: i + 1 }}>
 							<h3>{month}</h3>
-							<MonthCalendar {year} selectedMonth={i + 1} titleLength={1} />
+							<MonthCalendar {year} selectedMonth={i + 1} titleLength={1} highlightedDates={highlighted[i]} />
 						</div>
 					{/if}
 				</div>
 			{/each}
 		{/if}
 	</div>
-	<Menu bind:year bind:selectedMonth />
+	<Menu bind:year bind:selectedMonth {highlighted} />
 </div>
 
 <style>

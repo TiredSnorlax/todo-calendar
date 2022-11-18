@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import { themes, type ITheme } from '$lib/Layout/Theme';
 
 	import { themeID, user } from '$lib/Layout/stores';
