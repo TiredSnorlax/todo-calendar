@@ -49,7 +49,6 @@ export const todoSchema = new Schema<ITodo>({
 	tag: String
 });
 
-console.log('initModels');
 export const TodoModel = mongoose.models.Todo || mongoose.model('Todo', todoSchema);
 export const DateModel = mongoose.models.Date || mongoose.model('Date', dateSchema);
 export const UserModel = mongoose.models.User || mongoose.model('User', userSchema);
