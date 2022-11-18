@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { MONGODB_URI } from '$env/static/private';
+import { domain } from '$lib/utils';
 
 // export const connect = async () => {
 // 	if (mongoose.connection.readyState === 0 || mongoose.connection.readyState === 3) {
@@ -19,7 +20,7 @@ if (!cached) {
 	cached = global.mongoose = { conn: null, promise: null };
 }
 
-async function connect() {
+export async function dbConnect() {
 	if (cached.conn) {
 		return cached.conn;
 	}
@@ -51,5 +52,9 @@ async function connect() {
 // 		method: 'POST'
 // 	});
 // };
+
+const connect = async () => {
+	await fetch(domain + 'api/connect', { method: 'POST' });
+};
 
 export default connect;
