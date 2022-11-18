@@ -46,15 +46,3 @@ export async function dbConnect() {
 
 	return cached.conn;
 }
-
-// const connect = async () => {
-// 	await fetch(domain + 'api/connect', {
-// 		method: 'POST'
-// 	});
-// };
-
-const connect = async () => {
-	await fetch(domain + 'api/connect', { method: 'POST' });
-};
-
-export default connect;

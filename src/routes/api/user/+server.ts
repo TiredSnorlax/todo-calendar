@@ -1,4 +1,4 @@
-import connect from '$lib/db/connect';
+// import connect from '$lib/db/connect';
 import { UserModel } from '$lib/db/Schemas';
 import type { IUser } from '$lib/db/Schemas/User';
 import { error } from '@sveltejs/kit';
@@ -6,7 +6,7 @@ import type { HydratedDocument } from 'mongoose';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ cookies }) => {
-	await connect();
+	// await connect();
 	const userID = cookies.get('session');
 	if (userID) {
 		try {
@@ -21,7 +21,7 @@ export const GET: RequestHandler = async ({ cookies }) => {
 };
 
 export const POST: RequestHandler = async ({ cookies, request }) => {
-	await connect();
+	// await connect();
 	const userID = cookies.get('session');
 	const newInfo = await request.json();
 	if (userID) {
