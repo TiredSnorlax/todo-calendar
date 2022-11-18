@@ -4,7 +4,7 @@ import type { ITodo } from '$lib/db/Schemas/Todo';
 import type { IDate } from '$lib/db/Schemas/Date';
 import { TodoModel, UserModel, DateModel } from '$lib/db/Schemas';
 import type { HydratedDocument } from 'mongoose';
-import { connect } from '$lib/db/connect';
+import connect from '$lib/db/connect';
 import type { IChange } from '$lib/Todo';
 
 export const PUT: RequestHandler = async ({ request, params, cookies }) => {

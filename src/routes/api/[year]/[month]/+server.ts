@@ -1,4 +1,4 @@
-import { connect } from '$lib/db/connect';
+import connect from '$lib/db/connect';
 import { DateModel } from '$lib/db/Schemas';
 import type { IDate } from '$lib/db/Schemas/Date';
 import type { RequestHandler } from '@sveltejs/kit';

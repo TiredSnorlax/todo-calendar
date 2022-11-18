@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import { connect } from '$lib/db/connect';
+import connect from '$lib/db/connect';
 import { DateModel } from '$lib/db/Schemas';
 // import { DateModel } from '$lib/db/Schemas/Date';
 

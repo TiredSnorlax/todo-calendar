@@ -1,4 +1,4 @@
-import { connect } from '$lib/db/connect';
+import connect from '$lib/db/connect';
 import { UserModel } from '$lib/db/Schemas';
 import type { IUser } from '$lib/db/Schemas/User';
 import { error } from '@sveltejs/kit';
