@@ -127,7 +127,7 @@
 		border-radius: 2rem;
 
 		display: flex;
-		justify-content: center;
+		justify-content: flex-start;
 		flex-direction: column;
 
 		position: relative;

@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { getMonths } from '$lib/Months';
+	import { days, getMonths } from '$lib/Months';
 	import { domain } from '$lib/utils';
-	import { onMount } from 'svelte';
-	import { fade, scale, slide } from 'svelte/transition';
-	import { page } from '$app/stores';
+	import { fade, scale, blur } from 'svelte/transition';
 	import type { PageData } from '.svelte-kit/types/src/routes/[year]/[month]/[day]/$types';
 
 	export let data: PageData;
@@ -11,11 +9,9 @@
 	let month: number = parseInt(data.month!);
 	let year: number = parseInt(data.year!);
 
-	// $: {
-	// 	day = parseInt(data.day!);
-	// 	month = parseInt(data.month!);
-	// 	year = parseInt(data.year!);
-	// }
+	const getDay = (d: number, m: number, y: number) => {
+		return new Date(y, m - 1, d).getDay();
+	};
 
 	const nextDay = () => {
 		if (!day) return;
@@ -53,14 +49,19 @@
 
 	let nextLink = nextDay();
 	let prevLink = prevDay();
+
+	$: dayOfWeek = getDay(day, month, year);
 </script>
 
 <div class="container" transition:fade>
-	<p transition:scale>{day ?? ' '}</p>
-	<p transition:scale={{ delay: 200 }}>/</p>
-	<p transition:scale={{ delay: 400 }}>{month ?? ''}</p>
-	<p transition:scale={{ delay: 600 }}>/</p>
-	<p transition:scale={{ delay: 800 }}>{year ?? ''}</p>
+	<div class="dateContainer">
+		<p transition:scale>{day ?? ' '}</p>
+		<p transition:scale={{ delay: 200 }}>/</p>
+		<p transition:scale={{ delay: 400 }}>{month ?? ''}</p>
+		<p transition:scale={{ delay: 600 }}>/</p>
+		<p transition:scale={{ delay: 800 }}>{year ?? ''}</p>
+	</div>
+	<p class="dayLabel" transition:blur={{ duration: 500 }}>{days[dayOfWeek]}</p>
 	<div class="arrowContainer">
 		<a href={prevLink}><span class="material-icons-outlined"> chevron_left </span></a>
 		<a href={nextLink}><span class="material-icons-outlined"> chevron_right </span></a>
@@ -69,9 +70,19 @@
 
 <style>
 	.container {
+		top: 0;
+		left: 0;
+		right: 0;
 		position: absolute;
-		inset: 0;
-		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.dateContainer {
+		position: relative;
+		padding-top: 1rem;
 
 		width: 100%;
 		max-width: 600px;
@@ -84,6 +95,8 @@
 	.arrowContainer {
 		position: absolute;
 		inset: 0;
+		/* left: -1rem;
+		right: -1rem; */
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -102,6 +115,13 @@
 		color: var(--primary-color);
 		font-size: 4rem;
 		font-family: 'Oswald', sans-serif;
+	}
+
+	.dayLabel {
+		font-size: 2rem;
+		font-family: 'Open Sans', sans-serif;
+		font-weight: bold;
+		color: var(--secondary-color);
 	}
 
 	@media (max-width: 480px) {

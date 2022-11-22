@@ -3,7 +3,6 @@
 - [x] Create Calendar
   - [x] Use routes for different years
     - [x] Clicking on month would expand to dates of months
-    - [ ] Add hover effect on dates to show tasks (not sure)
   - [x] Use API to generate dates
   - [x] Page showing Calendar
 - [x] Create Individual pages for dates
@@ -18,11 +17,13 @@
     - [x] Todos ( by year )
 - [x] Profile page to show all undone tasks
 - [x] Add load user on page load
+- [ ] Finish the help menu
+- [ ] Add a credits menu -> link to GitHub
 
 URGENT
-- [ ] Fix db connection
-- [ ] Add loading screen after save 
 
+- [x] Fix db connection
+- [x] Add loading screen after save
 
 # Routes
 

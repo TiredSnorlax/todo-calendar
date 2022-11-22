@@ -109,17 +109,28 @@
 	.dateContainer {
 		position: relative;
 		width: 100%;
-		height: 6rem;
 		flex-shrink: 0;
+		height: 10rem;
 	}
 
 	.content {
 		width: 100%;
-		max-height: 90%;
+		max-height: 85%;
 		position: relative;
 		flex: 1 1 auto;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+	}
+
+	@media (max-width: 480px) {
+		.container {
+			padding: 1rem;
+			padding-top: 2rem;
+		}
+
+		.dateContainer {
+			height: 8rem;
+		}
 	}
 </style>

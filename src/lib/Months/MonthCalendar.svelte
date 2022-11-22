@@ -46,6 +46,14 @@
 		grid-auto-columns: minmax(0, 1fr);
 		grid-auto-flow: column;
 		gap: 2px;
+		aspect-ratio: 1;
+
+		flex: 1 1 0;
+	}
+
+	.dayRow {
+		display: flex;
+		flex-direction: column;
 	}
 
 	.dayLabels {
@@ -58,10 +66,13 @@
 		grid-template-rows: repeat(6, 1fr);
 		align-items: end;
 		gap: 2px;
+
+		flex: 1 1 0;
 	}
 
 	.dateItem {
-		aspect-ratio: 1;
+		width: 100%;
+		height: 100%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -85,6 +96,7 @@
 		opacity: 0;
 		user-select: none;
 		cursor: initial;
+		transition: 0s;
 	}
 
 	.dateItem.highlighted {

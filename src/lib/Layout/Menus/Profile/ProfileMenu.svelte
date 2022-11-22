@@ -74,7 +74,7 @@
 	}
 
 	.menu {
-		padding: 2rem;
+		/* padding: 2rem;
 
 		position: absolute;
 		width: calc(100% - 4rem);
@@ -82,7 +82,7 @@
 		max-height: calc(100vh - 6rem);
 
 		background: white;
-		border-radius: 0.5rem;
+		border-radius: 0.5rem; */
 
 		display: flex;
 		flex-direction: column;
@@ -214,10 +214,6 @@
 	}
 
 	@media (max-width: 600px) {
-		.menu {
-			width: calc(100% - 2rem);
-			padding: 1rem;
-		}
 		.stats {
 			padding-bottom: 0;
 		}

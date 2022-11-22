@@ -53,7 +53,7 @@
 
 <style>
 	.menu {
-		padding: 2rem;
+		/* padding: 2rem;
 		width: calc(100% - 4rem);
 		max-height: calc(100vh - 8rem);
 		max-width: 700px;
@@ -62,7 +62,7 @@
 
 		background: white;
 		border-radius: 0.5rem;
-		scrollbar-color: rgba(0, 0, 0, 0.4) white !important;
+		scrollbar-color: rgba(0, 0, 0, 0.4) white !important; */
 
 		display: grid;
 		grid-template-rows: 1fr 10fr 1fr;
@@ -114,16 +114,4 @@
 		background: none;
 	}
 
-	/* @media (max-width: 480px) {
-		.themes {
-			max-height: 500px;
-		}
-	} */
-
-	@media (max-width: 600px) {
-		.menu {
-			width: calc(100% - 2rem);
-			padding: 1rem;
-		}
-	}
 </style>

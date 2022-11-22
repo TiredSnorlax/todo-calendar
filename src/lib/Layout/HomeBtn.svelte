@@ -16,7 +16,7 @@
 </script>
 
 {#if show}
-	<div><a href="{domain}{currentYear}"><span class="material-icons-outlined"> home </span></a></div>
+	<div><a href={domain}><span class="material-icons-outlined"> home </span></a></div>
 {/if}
 
 <style>
@@ -45,5 +45,12 @@
 
 	span {
 		font-size: 30px;
+	}
+
+	@media (max-width: 480px) {
+		div {
+			top: 1rem;
+			left: 1rem;
+		}
 	}
 </style>

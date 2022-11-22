@@ -23,7 +23,7 @@ export const POST: RequestHandler = async ({ cookies, params }) => {
 		if (dates) {
 			highlightedDates = dates.filter((d) => d.todos.length > 0).map((d) => d.day);
 		}
-		highlightedYear.push(highlightedDates)
+		highlightedYear.push(highlightedDates);
 	}
 
 	return new Response(JSON.stringify(highlightedYear));

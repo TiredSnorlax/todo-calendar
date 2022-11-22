@@ -80,7 +80,6 @@
 </script>
 
 <div class="container">
-	<h2>Tasks</h2>
 	{#if needSave}
 		<button
 			transition:slide

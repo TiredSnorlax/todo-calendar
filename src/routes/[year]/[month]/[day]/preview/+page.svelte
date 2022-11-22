@@ -66,7 +66,7 @@
 	}
 
 	.date {
-		height: 6rem;
+		height: 10rem;
 		position: relative;
 	}
 

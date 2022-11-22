@@ -12,6 +12,8 @@
 	let createNewTag = false;
 	let newTagEle: HTMLInputElement;
 
+	let newDetailsEle: HTMLTextAreaElement;
+
 	const open = () => {
 		newTodo = {
 			task: '',
@@ -45,6 +47,7 @@
 	};
 
 	const onKeyDown = (e: KeyboardEvent) => {
+		if (document.activeElement === newDetailsEle) return;
 		if (e.key === 'Enter') {
 			console.log('enter');
 			createNewTodo();
@@ -66,7 +69,12 @@
 					</div>
 				</div>
 				<div class="inputField details">
-					<input placeholder="Details" bind:value={newTodo.details} />
+					<textarea
+						placeholder="Details"
+						bind:this={newDetailsEle}
+						bind:value={newTodo.details}
+						rows="3"
+					/>
 					<span />
 				</div>
 				<div class="tagsContainer">
@@ -79,7 +87,7 @@
 						{/each}
 						<input id="newTag" type="text" bind:value={newTag} bind:this={newTagEle} />
 						{#if createNewTag}
-							<p class="highlighted newTagP">#{newTag}</p>
+							<label for="newTag" class="highlighted newTagP">#{newTag}</label>
 						{/if}
 						{#if newTag.length > 0}
 							<button on:click={checkNewTag}>Add</button>
@@ -195,8 +203,17 @@
 		width: 100%;
 	}
 
-	.inputField.details input {
+	.inputField.details textarea {
+		flex: 1 1 auto;
 		font-size: 0.9rem;
+		width: 100%;
+		background: none;
+		outline: none;
+		border: none;
+
+		color: grey;
+
+		resize: none;
 	}
 
 	.addBtn {
@@ -262,6 +279,7 @@
 		padding-left: 1rem;
 	}
 
+	.tags label,
 	.tags p {
 		color: var(--primary-color);
 		margin: 0 0.5rem;
@@ -280,5 +298,11 @@
 	#newTag {
 		width: 0;
 		height: 0;
+	}
+
+	@media (max-width: 480px) {
+		.tagsContainer {
+			padding-bottom: 0;
+		}
 	}
 </style>

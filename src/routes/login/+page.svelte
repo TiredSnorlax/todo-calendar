@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { user } from '$lib/Layout/stores';
 	import { domain } from '$lib/utils';
 	import axios from 'axios';
 	import { slide } from 'svelte/transition';
@@ -20,8 +21,8 @@
 			})
 			.then(async (res) => {
 				errorMessage = null;
-				// window.location = domain + `${new Date().getFullYear}`;
-				await goto('/' + new Date().getFullYear());
+				user.set(res.data);
+				await goto('/');
 			})
 			.catch((err) => {
 				errorMessage = err.response.data.message;
@@ -68,10 +69,6 @@
 	.container {
 		width: 100vw;
 		height: 100vh;
-
-		--primary-color: rgb(128, 128, 255);
-		--secondary-color: green;
-		--bg-color: rgb(130, 181, 190);
 
 		display: flex;
 		flex-direction: column;
