@@ -65,7 +65,7 @@
 </script>
 
 <svelte:head>
-		<link rel="icon" href="/favicon.png" />
+	<link rel="icon" href="/favicon.ico" />
 </svelte:head>
 
 <div class="container" class:scrollable={!open}>

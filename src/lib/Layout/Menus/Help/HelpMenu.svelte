@@ -117,14 +117,24 @@
 		overflow: hidden;
 
 		max-width: 1000px;
+		position: relative;
 	}
 
 	.menu > div {
 		overflow-y: auto;
 		height: 800px;
+		max-height: 100%;
 		scrollbar-color: var(--primary-color) white;
 
 		scroll-behavior: smooth;
+	}
+
+	.menu > div::-webkit-scrollbar-track {
+		background: white;
+	}
+
+	.menu > div::-webkit-scrollbar-thumb {
+		border-color: white;
 	}
 
 	.break {

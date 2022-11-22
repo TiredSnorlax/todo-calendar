@@ -16,10 +16,12 @@
 
 		font-size: 2rem;
 
-		width: 100%;
 		text-align: center;
 		text-decoration: underline;
 		text-decoration-thickness: 3px;
+
+		border-top-left-radius: 0.5rem;
+		border-top-right-radius: 0.5rem;
 
 		padding-top: 2rem;
 		padding-left: 1rem;

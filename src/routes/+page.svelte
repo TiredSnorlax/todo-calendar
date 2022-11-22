@@ -25,7 +25,6 @@
 			.post(domain + `api/${year}`)
 			.then((res) => {
 				highlighted = res.data;
-				console.log(highlighted);
 			})
 			.catch((err) => {
 				console.log(err.response.data);

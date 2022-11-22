@@ -134,6 +134,7 @@
 		}
 		.menuContainer > :global(div) {
 			width: calc(100% - 2rem);
+		max-height: calc(100vh - 4rem);
 			padding: 1rem;
 		}
 	}
