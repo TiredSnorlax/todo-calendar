@@ -64,6 +64,10 @@
 	});
 </script>
 
+<svelte:head>
+		<link rel="icon" href="/favicon.png" />
+</svelte:head>
+
 <div class="container" class:scrollable={!open}>
 	<HomeBtn />
 	<SettingsContainer bind:open />

@@ -50,6 +50,7 @@
 				<span />
 			</div>
 		</div>
+		<p class="signupPrompt">No account? Sign up <a href="./signup">here</a></p>
 		{#if loading}
 			<p transition:slide>Loading...</p>
 		{:else}
@@ -194,5 +195,9 @@
 
 	.messageContainer p {
 		color: white;
+	}
+
+	.signupPrompt {
+		padding-top: 1rem;
 	}
 </style>

@@ -183,7 +183,7 @@
 	}
 
 	@media (max-width: 480px) {
-		.menu div {
+		.menu > div {
 			height: 600px;
 		}
 
